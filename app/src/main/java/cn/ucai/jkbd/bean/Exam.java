@@ -109,4 +109,20 @@ public class Exam {
     public void setUserAnswer(String userAnswer) {
         this.userAnswer = userAnswer;
     }
+
+    @Override
+    public String toString() {
+        return "Exam{" +
+                "id=" + id +
+                ", question='" + question + '\'' +
+                ", answer='" + answer + '\'' +
+                ", item1='" + item1 + '\'' +
+                ", item2='" + item2 + '\'' +
+                ", item3='" + item3 + '\'' +
+                ", item4='" + item4 + '\'' +
+                ", explains='" + explains + '\'' +
+                ", url='" + url + '\'' +
+                ", userAnswer='" + userAnswer + '\'' +
+                '}';
+    }
 }
