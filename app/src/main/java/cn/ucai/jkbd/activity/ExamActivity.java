@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.Gallery;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -29,6 +30,7 @@ import cn.ucai.jkbd.bean.Exam;
 import cn.ucai.jkbd.bean.ExamInfo;
 import cn.ucai.jkbd.biz.ExamBiz;
 import cn.ucai.jkbd.biz.IExamBiz;
+import cn.ucai.jkbd.view.QuestionAdapter;
 
 /**
  * Created by clawpo on 2017/6/29.
@@ -41,7 +43,9 @@ public class ExamActivity extends AppCompatActivity {
     LinearLayout layoutLoading,layout03,layout04;
     ImageView mImageView;
     ProgressBar dialog;
+    Gallery mGallery;
     IExamBiz biz;
+    QuestionAdapter mAdapter;
     boolean isLoadExamInfo = false;
     boolean isLoadQuestions = false;
 
@@ -89,6 +93,7 @@ public class ExamActivity extends AppCompatActivity {
         tvExamInfo = (TextView) findViewById(R.id.tv_examinfo);
         tvExamTitle = (TextView) findViewById(R.id.tv_exam_title);
         tvNo = (TextView) findViewById(R.id.tv_exam_no);
+        mGallery = (Gallery) findViewById(R.id.gallery);
         tvOp1 = (TextView) findViewById(R.id.tv_op1);
         tvOp2 = (TextView) findViewById(R.id.tv_op2);
         tvOp3 = (TextView) findViewById(R.id.tv_op3);
@@ -154,7 +159,7 @@ public class ExamActivity extends AppCompatActivity {
                     showData(examInfo);
                     initTimer(examInfo);
                 }
-
+                initGallery();
                 showExam(biz.getExam());
             }else{
                 layoutLoading.setEnabled(true);
@@ -162,6 +167,11 @@ public class ExamActivity extends AppCompatActivity {
                 tvLoad.setText("下载失败，点击重新下载");
             }
         }
+    }
+
+    private void initGallery() {
+        mAdapter = new QuestionAdapter(this);
+        mGallery.setAdapter(mAdapter);
     }
 
     private void initTimer(ExamInfo examInfo) {
