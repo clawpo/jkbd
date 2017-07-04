@@ -179,7 +179,13 @@ public class ExamActivity extends AppCompatActivity {
             }else{
                 mImageView.setVisibility(View.GONE);
             }
+            resetOptions();
+        }
+    }
 
+    private void resetOptions() {
+        for (CheckBox cb : cbs) {
+            cb.setChecked(false);
         }
     }
 
