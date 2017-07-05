@@ -43,6 +43,7 @@ import cn.ucai.jkbd.view.QuestionAdapter;
 
 public class ExamActivity extends AppCompatActivity {
     CheckBox[] cbs = new CheckBox[4];
+    TextView[] tvOps = new TextView[4];
     IExamBiz biz;
     QuestionAdapter mAdapter;
     boolean isLoadExamInfo = false;
@@ -126,6 +127,10 @@ public class ExamActivity extends AppCompatActivity {
         cbs[1] = cb02;
         cbs[2] = cb03;
         cbs[3] = cb04;
+        tvOps[0] = tvOp1;
+        tvOps[1] = tvOp2;
+        tvOps[2] = tvOp3;
+        tvOps[3] = tvOp4;
 //        tvLoad = (TextView) findViewById(R.id.tv_load);
 //        mImageView = (ImageView) findViewById(R.id.im_exam_image);
 //        layoutLoading.setOnClickListener(new View.OnClickListener() {
@@ -268,8 +273,34 @@ public class ExamActivity extends AppCompatActivity {
                 int userCB = Integer.parseInt(userAnswer) - 1;
                 cbs[userCB].setChecked(true);
                 setOptions(true);
+                setAnswerTextColor(userAnswer,exam.getAnswer());
             } else {
                 setOptions(false);
+                setOptionsColor();
+            }
+        }
+    }
+
+    private void setOptionsColor() {
+        for (TextView tvOp : tvOps) {
+            tvOp.setTextColor(getResources().getColor(R.color.black));
+        }
+    }
+
+    private void setAnswerTextColor(String userAnswer, String answer) {
+        int ra = Integer.parseInt(answer)-1;
+        for (int i = 0; i < tvOps.length; i++) {
+            if (i==ra){
+                tvOps[i].setTextColor(getResources().getColor(R.color.green));
+            }else{
+                if (!userAnswer.equals(answer)) {
+                    int ua = Integer.parseInt(userAnswer) - 1;
+                    if (i == ua) {
+                        tvOps[i].setTextColor(getResources().getColor(R.color.red));
+                    } else {
+                        tvOps[i].setTextColor(getResources().getColor(R.color.black));
+                    }
+                }
             }
         }
     }
